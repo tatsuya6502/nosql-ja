@@ -10,7 +10,7 @@
 
 ### Install "mongo" Ruby Gem
 
-```sh
+```console
 $ gem install mongo
 Fetching: bson-1.9.1.gem (100%)
 Successfully installed bson-1.9.1
@@ -21,7 +21,7 @@ Successfully installed mongo-1.9.1
 
 @TODO: mongo_ext won't be necessary.
 
-```sh
+```console
 $ gem install mongo_ext
 Fetching: mongo_ext-0.19.3.gem (100%)
 Building native extensions.  This could take a while...
@@ -29,7 +29,7 @@ Successfully installed mongo_ext-0.19.3
 1 gem installed
 ```
 
-```sh
+```console
 $ gem install bson_ext
 Fetching: bson_ext-1.9.1.gem (100%)
 Building native extensions.  This could take a while...
@@ -37,7 +37,7 @@ Successfully installed bson_ext-1.9.1
 1 gem installed
 ```
 
-```sh
+```console
 $ sudo mkdir -p /data/db
 $ sudo chown tatsuya:tatsuya /data/db
 $ rm -rf /data/db/*
@@ -51,7 +51,7 @@ See [the gerelal README](../README.md).
 
 ### Load Movie Lens Dataset to MongoDB
 
-```sh
+```console
 $ cd $DEMO/mongo-ruby
 $ ./loader.rb $DEMO/data/ml-100K/u.item
 $ ./loader.rb $DEMO/data/ml-100K/u.user
@@ -71,7 +71,7 @@ See [VoltDB README](../voltdb/README.md).
 
 #### VoltDB
 
-```sh
+```console
 $ sqlcmd
 ```
 
@@ -88,7 +88,7 @@ $ sqlcmd
 
 #### MongoDB
 
-```sh
+```console
 $ cd $DEMO/mongodb-ruby
 $ irb
 ```

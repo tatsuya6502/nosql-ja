@@ -2,13 +2,13 @@
 
 ## Compile the Application Catalog
 
-```sh
+```console
 $ voltdb compile $DEMO/voltdb/movie_lens.sql
 ```
 
 ## Start VoltDB
 
-```sh
+```console
 $ voltdb create catalog movie_lens.jar
 
 Initializing VoltDB...
@@ -32,7 +32,7 @@ Server completed initialization.
 
 ## Load Movie Lens Dataset
 
-```sh
+```console
 $ csvloader movies --separator '|' --blank null -f $DEMO/data/ml/ml-100k/u.item
 $ csvloader users --separator '|' --blank null -f $DEMO/data/ml/ml-100k/u.user
 $ perl -pi.bak -e 's/\t/|/g;' $DEMO/data/ml/ml-100k/u.data
