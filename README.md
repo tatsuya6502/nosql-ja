@@ -52,7 +52,7 @@ deployment.
 
 ### Install Dev Tools
 
-```console
+```sh
 $ sudo yum groupinstall "Development Tools"
 ```
 
@@ -67,7 +67,7 @@ $ sudo yum groupinstall "Development Tools"
 - Version 2.10.2
 - http://www.scala-lang.org/downloads/distrib/files/scala-2.10.2.tgz
 
-```console
+```sh
 $ mkdir ~/opt
 $ ...
 ```
@@ -82,7 +82,7 @@ If you're PC is in China, you won't be able to access the primary
 Ruby-Gem repository. You'll need to use a mirror site in China. Create
 `~/.gemrc` file and put the following contents:
 
-```console
+```sh
 ---
 :sources:
 - http://gems.gzruby.org/
@@ -91,7 +91,7 @@ gem: --no-rdoc --no-ri
 
 #### Install rvm
 
-```console
+```sh
 $ curl -L https://get.rvm.io | bash -s stable
 $ source $HOME/.rvm/scripts/rvm
 ```
@@ -99,7 +99,7 @@ $ source $HOME/.rvm/scripts/rvm
 If you have rvm already installed, make sure to bring it up to the
 latest stable version.
 
-```console
+```sh
 $ source $HOME/.rvm/scripts/rvm
 $ rvm get stable
 $ rvm reload
@@ -107,7 +107,7 @@ $ rvm reload
 
 #### Install Ruby 2.0
 
-```console
+```sh
 $ rvm list known
 $ rvm install 2.0.0
 $ rvm alias create default 2.0.0
@@ -133,7 +133,7 @@ Add `source $HOME/.rvm/scripts/rvm` to your shell rc file
 If you get the following error while installing Ruby, you need to
 manually set the latest version of Ruby Gem.
 
-```console
+```sh
 There was an error while trying to resolve rubygems version for 'latest'
 ```
 
@@ -184,7 +184,7 @@ ruby_2.0.0_rubygems_version=2.0.3
 
 Download, extract and compile Redis with:
 
-```console
+```sh
 $ sudo yum search jemalloc
 $ wget http://redis.googlecode.com/files/redis-2.6.14.tar.gz
 $ tar xzf redis-2.6.14.tar.gz
@@ -196,13 +196,13 @@ $ make
 The binaries that are now compiled are available in the src
  directory. Run Redis with:
 
-```console
+```sh
 $ src/redis-server
 ```
 
 You can interact with Redis using the built-in client:
 
-```console
+```sh
 $ src/redis-cli
 redis> set foo bar
 OK

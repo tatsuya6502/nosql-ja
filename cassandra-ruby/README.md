@@ -1,7 +1,7 @@
 
 @TODO: This is pretty unfinished...
 
-```irb
+```ruby
 require('cassandra')
 
 client = Cassandra.new('MovieLens')

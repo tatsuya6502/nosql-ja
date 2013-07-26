@@ -10,7 +10,7 @@
 
 ### Install "mongo" Ruby Gem
 
-```console
+```sh
 $ gem install mongo
 Fetching: bson-1.9.1.gem (100%)
 Successfully installed bson-1.9.1
@@ -21,7 +21,7 @@ Successfully installed mongo-1.9.1
 
 @TODO: mongo_ext won't be necessary.
 
-```console
+```sh
 $ gem install mongo_ext
 Fetching: mongo_ext-0.19.3.gem (100%)
 Building native extensions.  This could take a while...
@@ -29,7 +29,7 @@ Successfully installed mongo_ext-0.19.3
 1 gem installed
 ```
 
-```console
+```sh
 $ gem install bson_ext
 Fetching: bson_ext-1.9.1.gem (100%)
 Building native extensions.  This could take a while...
@@ -37,7 +37,7 @@ Successfully installed bson_ext-1.9.1
 1 gem installed
 ```
 
-```console
+```sh
 $ sudo mkdir -p /data/db
 $ sudo chown tatsuya:tatsuya /data/db
 $ rm -rf /data/db/*
@@ -51,7 +51,7 @@ See [the gerelal README](../README.md).
 
 ### Load Movie Lens Dataset to MongoDB
 
-```console
+```sh
 $ cd $DEMO/mongo-ruby
 $ ./loader.rb $DEMO/data/ml-100K/u.item
 $ ./loader.rb $DEMO/data/ml-100K/u.user
@@ -71,7 +71,7 @@ See [VoltDB README](../voltdb/README.md).
 
 #### VoltDB
 
-```console
+```sh
 $ sqlcmd
 ```
 
@@ -88,12 +88,12 @@ $ sqlcmd
 
 #### MongoDB
 
-```console
+```sh
 $ cd $DEMO/mongodb-ruby
 $ irb
 ```
 
-```irb
+```ruby
 > require 'mongo'
 > include Mongo
 > client = MongoClient.new
@@ -104,11 +104,11 @@ $ irb
 > ratings = db.collection(:ratings)
 ```
 
-```irb
+```ruby
 > ratings.count
 ```
 
-```irb
+```ruby
 > movies.find_one
 > users.find_one
 > ratings.find_one
@@ -125,7 +125,7 @@ $ irb
 
 ### MongoDB
 
-```irb
+```ruby
 > movies.find({:title => /batman/i})
 > movies.find({:title => /batman/i}).count
 > movies.find({:movie_title => /batman/i}).map { |m| m['movie_title'] }
@@ -143,20 +143,20 @@ $ irb
 
 #### MongoDB
 
-```irb
+```ruby
 > movies.find({:movie_id => id}).count
 > movies.find({:movie_id => id, :rating => 5}).count
 ```
 
 ### MongoDB: Add Some Fields to an Existing Movie Document
 
-```irb
+```ruby
 > movies.update({:_id => id}, {'$set' => {:editors_choice => true}}
 ```
 
 ### MongoDB: Create Indices
 
-```irb
+```ruby
 > ratings.index_information
 > ratings.create_index(:movie_id)
 ```
@@ -184,7 +184,7 @@ $ irb
 
 #### MongoDB
 
-```irb
+```ruby
 > map = <<-EOC
 function() {
   emit({ movie_id:this.movie_id, rating:this.rating }, { count:1 });
@@ -197,7 +197,7 @@ function(key, values) {
   values.forEach(function(v) {
     count += v['count'];
   });
- 
+
   return { count: count };
 };
   EOC
@@ -205,7 +205,7 @@ function(key, values) {
 > cr = ratings.map_reduce(map, reduce, { :out => 'count_by_rating' })
 ```
 
-```irb
+```ruby
 > cr.conut
 > cr.find_one
 > cr.find_one({:_id => {:movie_id => id, :rating => 5}})['value']['count']
