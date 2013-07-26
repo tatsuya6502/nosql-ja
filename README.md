@@ -1,4 +1,4 @@
-# NoSQL Demo Matirials
+# NoSQL Demo Materials
 
 @TODO: Translate to Japanese.
 
