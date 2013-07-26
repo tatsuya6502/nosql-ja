@@ -1,0 +1,51 @@
+-- -*- mode:sql -*-
+
+DROP KEYSPACE MovieLensCQL3;
+
+CREATE KEYSPACE MovieLensCQL3
+         WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
+
+USE MovieLensCQL3;
+
+CREATE TABLE User (
+  user_id int,
+  age int,
+  gender varchar,
+  occupation varchar,
+  zip_code bigint,
+  PRIMARY KEY (user_id)
+);
+
+
+CREATE TABLE Movie (
+  movie_id    int,
+  title       varchar,
+  unknown     boolean,
+  action      boolean,
+  aventure    boolean,
+  animation   boolean,
+  children    boolean,
+  comedy      boolean,
+  crime       boolean,
+  documentary boolean,
+  drama       boolean,
+  fantasy     boolean,
+  film_noir   boolean,
+  horror      boolean,
+  musical     boolean,
+  mystery     boolean,
+  romance     boolean,
+  sci_fi      boolean,
+  thriller    boolean,
+  war         boolean,
+  western     boolean,
+  PRIMARY KEY (movie_id)
+);
+
+CREATE TABLE MovieRatings (
+  movie_id int,
+  timestamp int,
+  user_id int,
+  rating int,
+  PRIMARY KEY (movie_id, timestamp, user_id)
+);
