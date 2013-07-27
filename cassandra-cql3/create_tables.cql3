@@ -12,7 +12,7 @@ CREATE TABLE users (
   age int,
   gender varchar,
   occupation varchar,
-  zip_code varchar
+  zip_code varchar,
   PRIMARY KEY (user_id)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE movies (
   imdb_url           varchar,
   unknown            int,
   action             int,
-  aventure           int,
+  adventure          int,
   animation          int,
   children           int,
   comedy             int,
