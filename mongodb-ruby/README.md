@@ -123,7 +123,7 @@ $ irb
 > SELECT mokie_id, title FROM movies WHERE title LIKE 'Batman%(1995)%';
 ```
 
-### MongoDB
+#### MongoDB
 
 ```ruby
 > movies.find({:title => /batman/i})
@@ -153,6 +153,20 @@ $ irb
 ```ruby
 > movies.update({:_id => id}, {'$set' => {:editors_choice => true}}
 ```
+
+VoltDB doesn't allow to alter the schema at run time.
+
+```SQL
+> ALTER TABLE users ADD editors_choice VARCHAR(1);
+Unexpected Ad Hoc Planning Error: java.lang.RuntimeException: Error compiling query: java.lang.RuntimeException: Unsupported SQL verb in statement: "ALTER TABLE users ADD editors_choice VARCHAR(1)"
+
+> DROP TABLE users;
+Unexpected Ad Hoc Planning Error: java.lang.RuntimeException: Error compiling query: java.lang.RuntimeException: Unsupported SQL verb in statement: "DROP TABLE users"
+
+CREATE INDEX user_age ON users (age);
+Unexpected Ad Hoc Planning Error: java.lang.RuntimeException: Error compiling query: java.lang.RuntimeException: Unsupported SQL verb in statement: "CREATE INDEX user_age ON users (age)
+```
+
 
 ### MongoDB: Create Indices
 
