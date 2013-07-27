@@ -134,7 +134,7 @@ class MovieRatings
   end
 end
 
-# cassandra-0.18.0 gen depends on thrift (< 0.9, >= 0.7.0) which doesn'
+# cassandra-0.18.0 gem depends on thrift (< 0.9, >= 0.7.0) which doesn'
 # support non ASCII characters.
 def remove_non_ascii_chars(str)
   str.tr('Áéèö', 'Aeeo')
