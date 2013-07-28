@@ -12,6 +12,36 @@ $ gem install cql-rb
 ```
 
 
+### Download Movie Lens Dataset
+
+See the [general README](../README.md).
+
+
+### Start Cassandra
+
+```console
+$ sudo mkdir -p /var/lib/cassandra
+$ sudo chown your-user-name:group /var/lib/cassandra
+$ rm -rf /var/lib/cassandra/*
+$ cassandra
+```
+
+
+### Load Movie Lens Dataset to Cassandra via CQL3 Ruby Client
+
+```console
+$ cd $DEMO/cassandra-cql3
+$ ./loader.rb $DEMO/data/ml-100K/u.item
+$ ./loader.rb $DEMO/data/ml-100K/u.user
+$ ./loader.rb $DOMO/data/ml-100K/u.data
+```
+
+
+### Load Movie Lens Dataset to VoltDB
+
+See the [VoltDB Demo README](../voltdb/README.md).
+
+
 ## Demo
 
 ```console
