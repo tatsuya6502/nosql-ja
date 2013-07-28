@@ -19,7 +19,7 @@ Successfully installed mongo-1.9.1
 2 gems installed
 ```
 
-@TODO: mongo_ext won't be necessary.
+@TODO: CHECKME: mongo_ext won't be necessary.
 
 ```console
 $ gem install mongo_ext
@@ -46,7 +46,7 @@ $ mongod
 
 ### Download Movie Lens Dataset
 
-See [the gerelal README](../README.md).
+See the [general README](../README.md).
 
 
 ### Load Movie Lens Dataset to MongoDB
@@ -70,6 +70,10 @@ See [VoltDB README](../voltdb/README.md).
 ### Inspect Movie Lens Dataset
 
 #### VoltDB
+
+Check the [DDL](../voltdb/movie_lens.sql)
+
+Run VoltDB SQL client.
 
 ```console
 $ sqlcmd
@@ -200,6 +204,11 @@ Unexpected Ad Hoc Planning Error: java.lang.RuntimeException: Error compiling qu
 
 #### MongoDB
 
+MongoDB doesn't support SQL-like aggregation. Use Map Reduce instead.
+
+Both map and reduce functions are run at server-side so they have to
+be JavaScript functions.
+
 ```ruby
 > map = <<-EOC
 function() {
@@ -217,7 +226,12 @@ function(key, values) {
   return { count: count };
 };
   EOC
+```
 
+Run Map Reduce. The result will be stored in a new collection
+`count_by_rating`.
+
+``` ruby
 > cr = ratings.map_reduce(map, reduce, { :out => 'count_by_rating' })
 ```
 
