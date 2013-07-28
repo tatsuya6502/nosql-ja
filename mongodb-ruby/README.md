@@ -37,19 +37,22 @@ Successfully installed bson_ext-1.9.1
 1 gem installed
 ```
 
-```console
-$ sudo mkdir -p /data/db
-$ sudo chown tatsuya:tatsuya /data/db
-$ rm -rf /data/db/*
-$ mongod
-```
-
 ### Download Movie Lens Dataset
 
 See the [general README](../README.md).
 
 
-### Load Movie Lens Dataset to MongoDB
+### Start MongoDB
+
+```console
+$ sudo mkdir -p /data/db
+$ sudo chown your-user-name:group /data/db
+$ rm -rf /data/db/*
+$ mongod
+```
+
+
+### Load Movie Lens Dataset to MongoDB via Ruby Client
 
 ```console
 $ cd $DEMO/mongo-ruby
@@ -61,8 +64,7 @@ $ ./loader.rb $DOMO/data/ml-100K/u.data
 
 ### Load Movie Lens Dataset to VoltDB
 
-See [VoltDB README](../voltdb/README.md).
-
+See the [VoltDB Preparation README](../voltdb/README.md).
 
 
 ## Demo
