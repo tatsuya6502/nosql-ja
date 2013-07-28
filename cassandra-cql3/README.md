@@ -90,8 +90,12 @@ $ cassandra-cli
 ```
 
 ```console
-> use
+> use movielens;
+> assume movie keys as int;
 > assume ratings keys as int;
+```
 
-
+```console
+> list movies[1:] limit 1 columns 20;
+> list ratings[1:] limit 1 columns 20;
 ```
