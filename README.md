@@ -1,21 +1,21 @@
 # NoSQL Demo Materials
 
-@TODO: Translate to Japanese.
+Copyright (c) 2013 Tatsuya Kawano, Cloudian Inc. & KK
+
+**@TODO**: Translate this document into Japanese.
 
 This seminar material contains the followings:
 
 - MongoDB
   * Ruby client
+  * JavaScript Map Reduce
 
 - Cassandra
-  * Ruby client (legacy Thrift)
   * CQL3
+  * Ruby client (CQL3)
 
 - VoltDB
   * `sqlcmd` (for ad-hoc queries) and `csvloader`
-
-- Neo4J
-  * Ruby client
 
 Hopefully, I'll have more time to add the followings in the future:
 
@@ -26,7 +26,13 @@ Hopefully, I'll have more time to add the followings in the future:
   * Scala client
 
 - VoltDB
+  * Java stored procedures
   * Scala client
+
+- Neo4J
+  * Ruby client (See the references in an old
+    [https://github.com/tatsuya6502/nosql-ja/blob/325552e2f509164070d7a5d08d100b9bff6f9091/neo4j-ruby/README.md](neo4j-ruby/README.md@325552e2f5).
+    I found that neography works great.
 
 
 ## Preparation
@@ -37,17 +43,17 @@ In the future, I'll use followings to demonstrate multi node
 deployment.
 
 - SmartOS with Solaris Zones (on HP MicroServer)
-- Arch Linux x86_64 with Docker (on Mac mini)
+- Arch Linux x86_64 with Docker CentOS containers (on Mac mini)
 
 
 ## Installation (Fedora 19)
 
-@TODO: Use Chef Solo to automate this process.
+**@TODO**: Use Chef Solo to automate this process.
 
 
 ### Enable Remote Login (sshd)
 
-**TODO** (System Settings)
+**@TODO:** (System Settings)
 
 
 ### Install Dev Tools
@@ -59,7 +65,8 @@ $ sudo yum groupinstall "Development Tools"
 ### Install Oracle JDK
 
 - Version 1.7.0_25
-- `alternatives`
+- `sudo alternatives java`
+- `sudo alternatives javac`
 
 
 ### Install Scala (Optional)
@@ -141,8 +148,10 @@ Go to http://github.com/rubygems/rubygems/tags and find out the latest
 version. Then open `~/.rvm/config/db` with an editor and set the
 `ruby_2.0.0_rubygem_version` to the latest version.
 
+For example,
+
 ```ruby
-ruby_2.0.0_rubygems_version=2.0.3
+ruby_2.0.0_rubygems_version=2.0.5
 ```
 
 
@@ -158,19 +167,20 @@ ruby_2.0.0_rubygems_version=2.0.3
 
 - Version 1.2.6
 - http://cassandra.apache.org/download/
-- OR use yum:
+- OR use yum from DataStax:
   * [DataStax Installing Cassandra](http://www.datastax.com/documentation/gettingstarted/index.html?pagename=docs&version=quick_start&file=quickstart#!_Installing Cassandra)
 
 
 ### Install VoltDB
 
 - Version 3.4
-- Download the binary from the download page (with mail news subscription)
+- Download the binary from the download page. (You'll be asked to
+  subscribe mail news.)
 - OR clone [VoltDB repository](https://github.com/VoltDB/voltdb) from GitHub
-  and build it by yourself. (You'll need `ant`.)
+  and build it by yourself. (You'll need `ant` installed.)
 
 
-### Install Neo4J
+### Install Neo4J (Optional)
 
 - Version 1.9.2
 - http://www.neo4j.org/download_thanks?edition=community&release=1.9.2&platform=unix
@@ -185,7 +195,7 @@ ruby_2.0.0_rubygems_version=2.0.3
 Download, extract and compile Redis with:
 
 ```console
-$ sudo yum search jemalloc
+$ sudo yum install jemalloc
 $ wget http://redis.googlecode.com/files/redis-2.6.14.tar.gz
 $ tar xzf redis-2.6.14.tar.gz
 $ cd redis-2.6.14
@@ -194,7 +204,7 @@ $ make
 ```
 
 The binaries that are now compiled are available in the src
- directory. Run Redis with:
+directory. Run Redis with:
 
 ```console
 $ src/redis-server
@@ -210,6 +220,7 @@ redis> get foo
 "bar"
 ```
 
+
 ### Install Infinispan (Optional)
 
 - Version 5.3.0
@@ -224,3 +235,51 @@ redis> get foo
 - There are three data sets with 100K, 1M and 10M rating records, get
   ones you want.
 
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2013 Tatsuya Kawano, Cloudian Inc. & KK
+
+**(en)**
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+**(ja)**
+
+以下に定める条件に従い、本ソフトウェアおよび関連文書のファイル（以下
+「ソフトウェア」）の複製を取得するすべての人に対し、ソフトウェアを無制
+限に扱うことを無償で許可します。これには、ソフトウェアの複製を使用、複
+写、変更、結合、掲載、頒布、サブライセンス、および/または販売する権利、
+およびソフトウェアを提供する相手に同じことを許可する権利も無制限に含ま
+れます。
+
+上記の著作権表示および本許諾表示を、ソフトウェアのすべての複製または重
+要な部分に記載するものとします。
+
+ソフトウェアは「現状のまま」で、明示であるか暗黙であるかを問わず、何ら
+の保証もなく提供されます。ここでいう保証とは、商品性、特定の目的への適
+合性、および権利非侵害についての保証も含みますが、それに限定されるもの
+ではありません。 作者または著作権者は、契約行為、不法行為、またはそれ
+以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの
+使用またはその他の扱いによって生じる一切の請求、損害、その他の義務につ
+いて何らの責任も負わないものとします。
