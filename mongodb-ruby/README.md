@@ -1,6 +1,6 @@
 # MongoDB (and VoltDB)
 
-## Prerequsits
+## Prerequisites
 
 - MongoDB (v2.4.5) should be installed.
 - VoltDB (v3.4) sholud be installed.
@@ -138,7 +138,9 @@ $ irb
 #### VoltDB
 
 ```sql
-> SELECT count(*) FROM ratings WHERE movie_id = 29;
+> SELECT COUNT(*) FROM ratings WHERE movie_id = 29;
+> SELECT COUNT(rating) FROM ratings WHERE movie_id = 29 AND rating = 5;
+> SELECT AVG(rating) FROM ratings WHERE movie_id = 29;
 ```
 
 #### MongoDB
