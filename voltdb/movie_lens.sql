@@ -46,7 +46,7 @@ CREATE TABLE ratings (
   user_id INTEGER NOT NULL,
   rating INTEGER,
   timestamp BIGINT NOT NULL,
-  PRIMARY KEY (movie_id, timestamp, user_id)
+  PRIMARY KEY (movie_id, user_id)
 );
 
 PARTITION TABLE ratings ON COLUMN movie_id;
