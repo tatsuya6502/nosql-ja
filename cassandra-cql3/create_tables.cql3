@@ -1,11 +1,11 @@
 -- -*- mode:sql -*-
 
-DROP KEYSPACE movielens_cql3;
+DROP KEYSPACE movielens;
 
-CREATE KEYSPACE movielens_cql3
+CREATE KEYSPACE movielens
          WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
 
-USE movielens_cql3;
+USE movielens;
 
 CREATE TABLE users (
   user_id int,
@@ -22,25 +22,7 @@ CREATE TABLE movies (
   release_date       varchar,
   video_release_date varchar,
   imdb_url           varchar,
-  unknown            int,
-  action             int,
-  adventure          int,
-  animation          int,
-  children           int,
-  comedy             int,
-  crime              int,
-  documentary        int,
-  drama              int,
-  fantasy            int,
-  film_noir          int,
-  horror             int,
-  musical            int,
-  mystery            int,
-  romance            int,
-  sci_fi             int,
-  thriller           int,
-  war                int,
-  western            int,
+  genres             set<varchar>,
   PRIMARY KEY (movie_id)
 );
 
@@ -49,5 +31,5 @@ CREATE TABLE ratings (
   user_id int,
   rating int,
   timestamp int,
-  PRIMARY KEY (movie_id, timestamp, user_id)
+  PRIMARY KEY (movie_id, user_id)
 );

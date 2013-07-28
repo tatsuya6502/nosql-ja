@@ -24,9 +24,8 @@ unless File.exists?(file_path)
   exit(1)
 end
 
-
 # --------------------------------------
-# Main
+# Constants, Helper Methods
 # --------------------------------------
 
 TABLES = {
@@ -38,13 +37,26 @@ TABLES = {
 INSERT_STATEMENTS = {
   'users'   => 'INSERT INTO users (user_id, age, gender, occupation, zip_code) VALUES (?,?,?,?,?)',
   'movies'  => 'INSERT INTO movies ' +
-               '  (movie_id, title, release_date, video_release_date, imdb_url,' +
-               '   unknown, action, adventure, animation, children, comedy, crime,' +
-               '   documentary, drama, fantasy, film_noir, horror, musical, mystery,' +
-               '   romance, sci_fi, thriller, war, western) ' +
-               '  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+               '  (movie_id, title, release_date, video_release_date, imdb_url, genres)' +
+               '  VALUES (?,?,?,?,?,?)',
   'ratings' => 'INSERT INTO ratings (movie_id, user_id, rating, timestamp) VALUES (?,?,?,?)'
 }
+
+GENRE_NAMES = %w{unknown Action Adventure Animation For-Children
+                   Comedy Crim Documentary Drama Fantasy Film-Noir
+                   Horror Musical Mystery Romance Sci-Fi Thriller
+                   War Western}
+
+def genres(values)
+  (0..18).zip(values[5..23]).inject([]) do |acc, iv|
+    index, value = iv
+    value != 1 ? acc : acc << GENRE_NAMES[index]
+  end
+end
+
+# --------------------------------------
+# Main
+# --------------------------------------
 
 dataset = File.basename(file_path).sub(/^u\./, '')
 table = TABLES[dataset]
@@ -55,7 +67,7 @@ end
 
 File.open(file_path, 'r:iso-8859-1:utf-8') do |file|
   client = Cql::Client.connect(host: 'localhost')
-  client.use('movielens_cql3')
+  client.use('movielens')
   statement = client.prepare(INSERT_STATEMENTS[table])
   count = 0
 
@@ -68,6 +80,9 @@ File.open(file_path, 'r:iso-8859-1:utf-8') do |file|
     if table == 'users'
       zip_code = field_values.pop
       field_values.push(zip_code.to_s)
+    elsif table == 'movies'
+      genres = genres field_values
+      field_values = field_values[0..4] + [genres]
     end
     # puts "field_values: #{field_values}"
     statement.execute(*field_values)
