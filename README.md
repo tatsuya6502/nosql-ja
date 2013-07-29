@@ -31,8 +31,8 @@ Hopefully, I'll have more time to add the followings in the future:
 
 - Neo4J
   * Ruby client (See the references in an old
-    [https://github.com/tatsuya6502/nosql-ja/blob/325552e2f509164070d7a5d08d100b9bff6f9091/neo4j-ruby/README.md](neo4j-ruby/README.md#325552e2f5)).
-    I found that neography works great.
+    [https://github.com/tatsuya6502/nosql-ja/blob/325552e2f5/neo4j-ruby/README.md](neo4j-ruby README at #325552e2f5)
+    ). I found neography works great.
 
 
 ## Preparation

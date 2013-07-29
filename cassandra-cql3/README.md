@@ -52,7 +52,7 @@ $ cqlsh
 ### Inspect Movie Lens Data Set in CQL3
 
 ```sql
-> USE movielens_cql3;
+> USE movielens;
 > SELECT COUNT(*) FROM ratings;
 ...
 Default LIMIT of 10000 was used. Specify your own LIMIT clause to get more results.
