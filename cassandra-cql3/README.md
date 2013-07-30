@@ -31,6 +31,7 @@ $ cassandra
 
 ```console
 $ cd $DEMO/cassandra-cql3
+$ cqlsh -f movie_lens.cql3
 $ ./loader.rb $DEMO/data/ml-100K/u.item
 $ ./loader.rb $DEMO/data/ml-100K/u.user
 $ ./loader.rb $DOMO/data/ml-100K/u.data
