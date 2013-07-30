@@ -134,7 +134,7 @@ $ irb
 ```ruby
 > movies.find({:title => /batman/i})
 > movies.find({:title => /batman/i}).count
-> movies.find({:movie_title => /batman/i}).map { |m| m['movie_title'] }
+> movies.find({:title => /batman/i}).map { |m| m['title'] }
 > movies.find_one({:title => /batman.*\(1989\).*/i})
 > id = movies.find_one({:title => /batman.*\(1989\).*/i})['_id']
 ```
