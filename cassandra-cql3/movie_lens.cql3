@@ -3,9 +3,11 @@
 DROP KEYSPACE movielens;
 
 CREATE KEYSPACE movielens
-         WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
+  WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
 
 USE movielens;
+
+-- CQL3 doesn't support foreign key constraint (and auto-increment columns).
 
 CREATE TABLE users (
   user_id int,
@@ -16,6 +18,9 @@ CREATE TABLE users (
   PRIMARY KEY (user_id)
 );
 
+-- CQL3 supports collection data types: set, list, and map.
+-- We use set<varchar> for genres.
+
 CREATE TABLE movies (
   movie_id           int,
   title              varchar,
@@ -25,6 +30,17 @@ CREATE TABLE movies (
   genres             set<varchar>,
   PRIMARY KEY (movie_id)
 );
+
+-- CQL3 translates a table with a composite primary key into
+-- a column family with wide rows.
+-- row key: the value of the first column in the primary key
+-- column names: the values in the rest of columns in the primary
+-- key plus a column name of a target column.
+--
+-- e.g. if movie_id = 100 and user_id = 20 then
+-- row key => 100
+-- column names: for user_id => 20:, for rating => 20:rating,
+-- and for timestamp => 20:timestamp
 
 CREATE TABLE ratings (
   movie_id int,

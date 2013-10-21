@@ -19,7 +19,7 @@ Successfully installed mongo-1.9.1
 2 gems installed
 ```
 
-@TODO: mongo_ext won't be necessary.
+@TODO: CHECKME: mongo_ext won't be necessary.
 
 ```console
 $ gem install mongo_ext
@@ -37,19 +37,22 @@ Successfully installed bson_ext-1.9.1
 1 gem installed
 ```
 
+### Download Movie Lens Dataset
+
+See the [general README](../README.md).
+
+
+### Start MongoDB
+
 ```console
 $ sudo mkdir -p /data/db
-$ sudo chown tatsuya:tatsuya /data/db
+$ sudo chown your-user-name:group /data/db
 $ rm -rf /data/db/*
 $ mongod
 ```
 
-### Download Movie Lens Dataset
 
-See [the gerelal README](../README.md).
-
-
-### Load Movie Lens Dataset to MongoDB
+### Load Movie Lens Dataset to MongoDB via Ruby Client
 
 ```console
 $ cd $DEMO/mongo-ruby
@@ -61,8 +64,7 @@ $ ./loader.rb $DOMO/data/ml-100K/u.data
 
 ### Load Movie Lens Dataset to VoltDB
 
-See [VoltDB README](../voltdb/README.md).
-
+See the [VoltDB Preparation README](../voltdb/README.md).
 
 
 ## Demo
@@ -70,6 +72,10 @@ See [VoltDB README](../voltdb/README.md).
 ### Inspect Movie Lens Dataset
 
 #### VoltDB
+
+Check the [DDL](../voltdb/movie_lens.sql)
+
+Run VoltDB SQL client.
 
 ```console
 $ sqlcmd
@@ -128,7 +134,7 @@ $ irb
 ```ruby
 > movies.find({:title => /batman/i})
 > movies.find({:title => /batman/i}).count
-> movies.find({:movie_title => /batman/i}).map { |m| m['movie_title'] }
+> movies.find({:title => /batman/i}).map { |m| m['title'] }
 > movies.find_one({:title => /batman.*\(1989\).*/i})
 > id = movies.find_one({:title => /batman.*\(1989\).*/i})['_id']
 ```
@@ -200,6 +206,11 @@ Unexpected Ad Hoc Planning Error: java.lang.RuntimeException: Error compiling qu
 
 #### MongoDB
 
+MongoDB doesn't support SQL-like aggregation. Use Map Reduce instead.
+
+Both map and reduce functions are run at server-side so they have to
+be JavaScript functions.
+
 ```ruby
 > map = <<-EOC
 function() {
@@ -217,7 +228,12 @@ function(key, values) {
   return { count: count };
 };
   EOC
+```
 
+Run Map Reduce. The result will be stored in a new collection
+`count_by_rating`.
+
+``` ruby
 > cr = ratings.map_reduce(map, reduce, { :out => 'count_by_rating' })
 ```
 

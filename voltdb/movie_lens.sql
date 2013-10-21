@@ -1,5 +1,7 @@
 -- -*- mode:sql -*-
 
+-- VoltDB doesn't support foreign key constraint (and auto-increment columns)
+
 CREATE TABLE users (
   user_id INTEGER UNIQUE NOT NULL,
   age TINYINT,
